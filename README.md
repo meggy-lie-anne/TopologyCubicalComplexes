@@ -21,3 +21,7 @@ Simplicial and cubical complexes are like two different tools in math that help 
 # Method 
 
 The method we use for computing homology follows the general principles of persistent homology. 
+First we define the 'CubicalComplex' class which is initialized with a list of tuples, where each tuple corresponds to the vertices of a cube within the complex. 
+
+Within this class we implemented a few functionalities for analysing the cubical complex. It is possible to traverse the complex and to obtain the amount of cubes within the complex, as well as its dimension (i.e. the maximum dimension of the cubes contained within the complex). Additionally, we are able to return the list of all vertices present in the complex (which enables easy access to the individual building blocks) ; it is also possible to find all cubes that are adjacent to a given vertex.
+
