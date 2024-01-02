@@ -18,14 +18,12 @@
 
 #v(4em)
 
-*This research project focuses on the implementation of homology and persistent homology algorithms for cubical complexes - which are mathematical structures that provide a combinatorial description of spaces by using cubes as building blocks -, and its applications on different surfaces (e.g. Klein bottle, torus etc).*
-
-
 == Introduction
 
-When talking about homology and persistent homology, it is often assumed that we are studying simplicial complexes and their filtrations. However, in some areas, data is better represented with *cubical complexes*, in which simplices are replaced with cubes. For instance, it is the case when dealing with an image made of square pixels, or a video which can be seen as a three-dimensional image, where the third dimension is time.
+When talking about homology and persistent homology, it is often assumed
+that we are studying simplicial complexes and their filtrations. However, in some areas, data is better represented with *cubical complexes*, in which simplices are replaced with cubes. For instance, it is the case when dealing with an image made of square pixels, or a video which can be seen as a three-dimensional image, where the third dimension is time.
 
-More formally, a cube can be defined as a product of unit intervals. A unit interval is either degenerate ($[i, i], i in NN$) or non-degenerate ($[i, i + 1]$). A 2-dimensional cube (a square) spanning from $(1, 3)$ to $(2, 4)$ would then be represented as:
+More formally, a cube can be defined as a product of unit intervals. An unit interval is either degenerate ($[i, i], i in NN$) or non-degenerate ($[i, i + 1]$). A 2-dimensional cube (a square) spanning from $(1, 3)$ to $(2, 4)$ would then be represented as:
 
 $ [1, 2] times [3, 4] $
 
@@ -47,11 +45,11 @@ Similarly to a simplicial complex, we can define a cubical complex as a set of c
   caption: "Example of a cubical complex"
 ) <ex1>
 
-Using similar definitions as for simplicial complex, it is possible to define homology and persistent homology for this kind of complex.
+With this kind of complex too, it is possible to define homology and persistent homology, using similar definitions as for simplicial complexes.
 
 == Representing cubical complexes
 
-We can take advantage of the structure of cubical complexes to represent them more efficiently. In a $d$-dimensional complex, each
+We can take advantage of the structure of cubical complexes to represent them more efficiently. In a $d$-dimensional complexe, each
 cube can be represented as an element of $NN^d$. Each element of this vector corresponds to one dimension. If the coordinate is even, the corresponding interval in the product is degenerate, and if it is odd it is non-degenerate. The interval corresponding to a coordinate $x$ starts at $x div 2$ (using euclidian division).
 
 The complex in @ex1 can thus be represented with this set (considering the y axis points down and that $(0, 0)$ is in the upper-left corner):
@@ -223,7 +221,7 @@ We can see that the number of generator is what we would expect. For instance, t
 
 == Discussion
 
-Our algorithm seems to correctly compute persistent homology for cubical complexes.
+Out algorithm seems to correctly compute persistent homology for cubical complexes.
 
 Unfortunately, we didn't have enough time to implement the persistent homology algorithm using various coefficients. Our code only supports $ZZ_2$.
 
