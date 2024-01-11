@@ -122,7 +122,7 @@ def reduce(mat: np.ndarray, k: CubicalComplex, filtration: list[Cube]):
                     mat[:, l] = 0
 
 INF = float('inf')
-Pair = tuple[int, int | float]
+Pair = "Pair"
 
 def pairs(mat: np.ndarray) -> list[Pair]:
     p = []

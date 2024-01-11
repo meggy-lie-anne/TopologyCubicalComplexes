@@ -25,7 +25,9 @@
 
 When talking about homology and persistent homology, it is often assumed that we are studying simplicial complexes and their filtrations. However, in some areas, data is better represented with *cubical complexes*, in which simplices are replaced with cubes. For instance, it is the case when dealing with an image made of square pixels, or a video which can be seen as a three-dimensional image, where the third dimension is time.
 
-More formally, a cube can be defined as a product of unit intervals. A unit interval is either degenerate ($[i, i], i in NN$) or non-degenerate ($[i, i + 1]$). A 2-dimensional cube (a square) spanning from $(1, 3)$ to $(2, 4)$ would then be represented as:
+For instance, they offer a useful framework for representing pixel-based data, such as bitmap images, where each pixel corresponds naturally to a cube. In this context, the grid-like structure of cubical complexes aligns smoothly with the structure of pixel grids. Moreover, the boundary definition in cubical complexes is particularly advantageous for tasks related to image processing. In a cubical complex, determining the boundary of a cube is straightforward, making it well-suited for identifying neighboring pixels in an image.
+
+More formally, a cube can be defined as a product of elementary intervals. An elementary interval is either degenerate ([𝑖, 𝑖], 𝑖 ∈ N) or non-degenerate ([𝑖, 𝑖 + 1]). A 2-dimensional cube (square) spanning from (1, 3) to (2, 4) would then be represented as:
 
 $ [1, 2] times [3, 4] $
 
@@ -53,10 +55,10 @@ Using similar definitions as for simplicial complex, it is possible to define ho
 
 === Representing cubical complexes
 
-We can take advantage of the structure of cubical complexes to represent them more efficiently. In a $d$-dimensional complex, each
-cube can be represented as an element of $NN^d$. Each element of this vector corresponds to one dimension. If the coordinate is even, the corresponding interval in the product is degenerate, and if it is odd it is non-degenerate. The interval corresponding to a coordinate $x$ starts at $x div 2$ (using euclidian division).
 
-The complex in @ex1 can thus be represented with this set (considering the y axis points down and that $(0, 0)$ is in the upper-left corner):
+We can improve the efficiency of the representation of cubical complexes by taking advantage of their structure. In a 𝑑-dimensional complex, each cube can be efficiently represented as an element of $NN^d$. Here, each element of this vector corresponds to a dimension. If the coordinate is even, the corresponding interval in the product is degenerate; if it is odd, it is non-degenerate. The interval corresponding to a coordinate $x$ starts at $x div 2$ (using Euclidean division).
+
+The complex illustrated in @ex1 can be represented using this set (assuming the y-axis points down, and (0, 0) is in the upper-left corner):
 
 $
 {
@@ -64,13 +66,18 @@ $
 }
 $
 
+Each element of this set corresponds to a cube in the complex. The first coordinate in each pair represents the x-coordinate, and the second coordinate represents the y-coordinate. For instance, $vec(0,2)$ gives us $[0,0] times [1,1]$, corresponding to the 0-dimensional cube (vertex) (0,1) ; $vec(1,2)$ gives us $[0,1] times [1,1]$, correponding to the 1-dimensional cube (edge) [0,1].
+
 This representation is much more compact and less ambiguous than listing the vertices that are part of each cube.
+
+
 
 === Computing homology
 
-It is then possible to compute homology, and more generaly persistent homology. To do so, we implemented the algorithm described by Wagner _et al._ @Wagner2012.
 
-Using a filtration, that is represented as function that assign to each vertex an index, we build a generalization of this filtration, that assigns an index to all cubes in the complex. Cubes can then be sorted according to their assigned index. The order of the vertices is preserved, and a non-vertex cube is garanteed to be after all its vertices.
+It is then possible to compute homology, and more generaly, persistent homology. To do so, we implemented the algorithm described by Wagner _et al._ @Wagner2012.
+
+Using a filtration, that is represented as a function that assigns to each vertex an index, we build a generalization of this filtration, that assigns an index to all cubes in the complex. Cubes can then be sorted according to their assigned index. The order of the vertices is preserved, and a non-vertex cube is guaranteed to be after all its vertices.
 
 We use this ordering to build a boundary matrix: each column corresponds to a cube in the complex (the $i$-th column corresponds to the cube with filtration index $i$ to be exact). The $j$-th element in this column is $1$ if the cube with filtration index $j$ is part of the boundary of the $i$-th cube (otherwise, it is $0$).
 
@@ -207,7 +214,7 @@ Our algorithm gives the following boundary matrix, which is then reduced:
   $
 }
 
-If we build the homology pairs and plot them on a bar diagram, this is what we obtain.
+If we build the homology pairs and plot them on a bar diagram, this is what we obtain. 
 
 #figure(image("simple_bars.png"))
 
@@ -225,11 +232,13 @@ We can see that the number of generator is what we would expect. For instance, t
 
 == Discussion
 
-Our algorithm seems to correctly compute persistent homology for cubical complexes.
+Our algorithm seems to correctly compute persistent homology for cubical complexes. Unfortunately, due to time constraints, we were unable to implement the persistent homology algorithm using various coefficients. As it is, our code only supports $ZZ_2$.
 
-Unfortunately, we didn't have enough time to implement the persistent homology algorithm using various coefficients. Our code only supports $ZZ_2$.
+The choice of coefficients in persistent homology are important for the detail of the captured topological features. For instance, using $ZZ_2$ coefficients simplifies computations and is well-suited for applications in image processing and computer graphics.
 
-Using other coefficients would require anoter definition of boundaries that is more general (for instance, when working in $ZZ$, cubes in a boundary are oriented and not just "present" or "absent"). The reduction algorithm should also be adapted to work in a different field, when summing columns together.
+Extending the model to support other coefficients would require we use a more general definition of boundaries (e.g. in $ZZ$, cubes in a boundary are oriented). However, this comes at the cost of increased computational complexity. The reduction algorithm should also be adapted to work in a different field, when summing columns together.
+
+
 
 == References
 
