@@ -238,6 +238,15 @@ The choice of coefficients in persistent homology are important for the detail o
 
 Extending the model to support other coefficients would require we use a more general definition of boundaries (e.g. in $ZZ$, cubes in a boundary are oriented). However, this comes at the cost of increased computational complexity. The reduction algorithm should also be adapted to work in a different field, when summing columns together.
 
+== Conclusion
+
+In conclusion, this research project delved into the implementation of homology and persistent homology algorithms specifically applied to cubical complexes. While traditional approaches focus on simplicial complexes, cubical complexes provide a more suitable representation for certain types of data, such as pixel-based images or three-dimensional structures incorporating time.
+
+The method presented efficiently represents cubical complexes, and allow for a more effective representation compared to listing individual vertices. The implemented algorithms for computing homology and persistent homology were based on the work of Wagner et al. [1], with an emphasis on using filtrations to assign indices to cubes and building boundary matrices. 
+
+Results from testing the code on both a simple example and classic mathematical surfaces, such as the Klein bottle, torus, and projective plane, gave expected outcomes. The homology generators and their corresponding dimensions align with the theoretical expectations. However, our current implementation supports only $ZZ_2$ coefficients. It can be noted that $ZZ_2$ coefficients are suitable for applications in image processing and computer graphics. Also, extending the model to accommodate other coefficients would involve a more general definition of boundaries.
+
+Further work could involve refining the model to support additional coefficients, adapting the reduction algorithm accordingly, and exploring applications in various fields where cubical complexes play a crucial role.
 
 
 == References
