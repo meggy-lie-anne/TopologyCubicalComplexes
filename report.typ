@@ -249,6 +249,13 @@ Results from testing the code on both a simple example and classic mathematical 
 Further work could involve refining the model to support additional coefficients, adapting the reduction algorithm accordingly, and exploring applications in various fields where cubical complexes play a crucial role.
 
 
+
+== Division of work 
+
+Ana Gelez : researches on cubical complexes and persistent homology, implementation of the algorithm, tests, report
+Meggy-Lie-Anne Chamand : researches on cubical complexes and persistent homology, report
+
+
 == References
 
 #bibliography("report.bib", title: none)
